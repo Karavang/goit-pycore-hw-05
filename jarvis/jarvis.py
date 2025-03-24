@@ -2,6 +2,9 @@ from modules.parse_input import parse_input
 from modules.add_contant import add_contact
 from modules.change_contact import change_contact
 from modules.show_phone import show_phone
+from modules.decocatcher import input_error
+
+
 import os
 
 
@@ -14,13 +17,15 @@ def main():
             case "hello":
                 print("How can I help you?")
             case "add":
-                print(add_contact(parsed[1], parsed[2], contacts))
+                print(input_error(add_contact)(parsed, contacts))
             case "change":
-                print(change_contact(parsed[1], parsed[2], contacts))
+                print(input_error(change_contact)(parsed, contacts))
             case "phone":
-                print(show_phone(parsed[1], contacts))
+                print(input_error(show_phone)(parsed, contacts))
             case "all":
-                print(contacts)
+                for name, phone in contacts.items():
+                    print(f"{name}: {phone}")
+
             case "close" | "exit":
                 try:
                     print("Good bye!")
